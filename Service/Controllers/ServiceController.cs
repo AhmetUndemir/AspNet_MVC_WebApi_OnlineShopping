@@ -16,16 +16,19 @@ namespace Service.Controllers
         {
             using (ShopContext context = new ShopContext())
             {
-                return null;
+                return context.Product.ToList();
             }
 
-            
+
         }
 
         // GET: api/Service/5
-        public string Get(int id)
+        public Product Get(int id)
         {
-            return "value";
+            using (ShopContext context = new ShopContext())
+            {
+                return context.Product.FirstOrDefault(x => x.id == id);
+            }
         }
 
         // POST: api/Service
@@ -33,6 +36,6 @@ namespace Service.Controllers
         {
         }
 
-       
+
     }
 }
