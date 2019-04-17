@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DAL.Model;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -16,8 +18,8 @@ namespace Shop.Controllers
             using (HttpClient client = new HttpClient())
             {
                 var response = await client.GetAsync("http://localhost:59396/api/Service");
-
-                return View();
+                var model = JsonConvert.DeserializeObject<List<Product>>(response.Content.ReadAsStringAsync().Result);
+                return View(model);
             }
 
             
