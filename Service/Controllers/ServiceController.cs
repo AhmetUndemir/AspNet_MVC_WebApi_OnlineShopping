@@ -32,8 +32,24 @@ namespace Service.Controllers
         }
 
         // POST: api/Service
-        public void Post([FromBody]string value)
+        public bool Post(List<ShopHistory> shoppingList)
         {
+            try
+            {
+                //throw new Exception();
+                using (ShopContext context = new ShopContext())
+                {
+                    context.ShopHistory.AddRange(shoppingList);
+                    context.SaveChanges();
+                    return true;
+                }
+                
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
         }
 
 
